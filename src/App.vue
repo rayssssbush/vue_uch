@@ -5,16 +5,13 @@ import TheWelcome from './components/TheWelcome.vue'
 
 <template>
 	<div>
-		<!-- Условный вывод текста в зависимости от значения age -->
-		<p>
-			{{
-				age < 18
-					? 'Подросток'
-					: age >= 19 && age <= 25
-					? 'Молодой человек'
-					: 'Мужчина'
-			}}
-		</p>
+		<!-- Абзацы, изначально видны -->
+		<p v-if="isVisible">Абзац 1</p>
+		<p v-if="isVisible">Абзац 2</p>
+		<p v-if="isVisible">Абзац 3</p>
+
+		<!-- Кнопка для скрытия абзацев -->
+		<button @click="hideParagraphs">Скрыть абзацы</button>
 	</div>
 </template>
 
@@ -22,17 +19,30 @@ import TheWelcome from './components/TheWelcome.vue'
 export default {
 	data() {
 		return {
-			age: 25, // Пример возраста
+			isVisible: true, // Изначально абзацы видны
 		}
+	},
+	methods: {
+		// Метод для скрытия абзацев
+		hideParagraphs() {
+			this.isVisible = false
+		},
 	},
 }
 </script>
 
 <style scoped>
-/* Стили по желанию */
-p {
-	font-size: 18px;
-	color: #333;
+button {
+	padding: 10px 20px;
+	background-color: #4caf50;
+	color: white;
+	border: none;
+	cursor: pointer;
+	margin-top: 20px;
+}
+
+button:hover {
+	background-color: #45a049;
 }
 </style>
 
