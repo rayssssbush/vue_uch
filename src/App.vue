@@ -4,11 +4,12 @@ import TheWelcome from './components/TheWelcome.vue'
 </script>
 <template>
 	<div>
-		<!-- Первый абзац, показывается, если visible = true -->
-		<p v-if="visible">Первый абзац: visible = true</p>
+		<!-- Абзац, изначально скрыт -->
+		<p v-if="isVisible">Это скрытый абзац, который теперь виден!</p>
 
-		<!-- Второй абзац, показывается, если visible = false -->
-		<p v-else>Второй абзац: visible = false</p>
+		<!-- Кнопки для показа/скрытия абзаца -->
+		<button v-if="!isVisible" @click="showParagraph">Показать абзац</button>
+		<button v-if="isVisible" @click="hideParagraph">Скрыть абзац</button>
 	</div>
 </template>
 
@@ -16,11 +17,37 @@ import TheWelcome from './components/TheWelcome.vue'
 export default {
 	data() {
 		return {
-			visible: true, // Изначальное значение для visible
+			isVisible: false, // Абзац изначально скрыт
 		}
+	},
+	methods: {
+		// Метод для показа абзаца
+		showParagraph() {
+			this.isVisible = true
+		},
+		// Метод для скрытия абзаца
+		hideParagraph() {
+			this.isVisible = false
+		},
 	},
 }
 </script>
+
+<style scoped>
+/* Стили по желанию */
+button {
+	padding: 10px 20px;
+	background-color: #4caf50;
+	color: white;
+	border: none;
+	cursor: pointer;
+	margin-top: 20px;
+}
+
+button:hover {
+	background-color: #45a049;
+}
+</style>
 
 <style scoped>
 /* Стили по желанию */
