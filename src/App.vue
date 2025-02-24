@@ -5,11 +5,32 @@ import TheWelcome from './components/TheWelcome.vue'
 
 <template>
 	<div>
-		<!-- Чекбокс -->
-		<input type="checkbox" v-model="isChecked" /> Показать абзац
+		<!-- Чекбоксы для выбора языков -->
+		<div>
+			<label>
+				<input type="checkbox" value="JavaScript" v-model="languages" />
+				JavaScript
+			</label>
+			<label>
+				<input type="checkbox" value="Python" v-model="languages" /> Python
+			</label>
+			<label>
+				<input type="checkbox" value="Java" v-model="languages" /> Java
+			</label>
+			<label>
+				<input type="checkbox" value="C++" v-model="languages" /> C++
+			</label>
+			<label>
+				<input type="checkbox" value="Ruby" v-model="languages" /> Ruby
+			</label>
+		</div>
 
-		<!-- Абзац, который показывается или скрывается в зависимости от состояния чекбокса -->
-		<p v-if="isChecked">Этот абзац отображается, если чекбокс отмечен.</p>
+		<!-- Вывод выбранных языков в виде списка -->
+		<ul>
+			<li v-for="(language, index) in languages" :key="index">
+				{{ language }}
+			</li>
+		</ul>
 	</div>
 </template>
 
@@ -17,7 +38,7 @@ import TheWelcome from './components/TheWelcome.vue'
 export default {
 	data() {
 		return {
-			isChecked: false, // Состояние чекбокса
+			languages: [], // Массив для выбранных языков
 		}
 	},
 }
