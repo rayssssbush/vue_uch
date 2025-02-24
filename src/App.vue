@@ -5,36 +5,17 @@ import TheWelcome from './components/TheWelcome.vue'
 
 <template>
 	<div>
-		<!-- Перебираем массив пользователей и отображаем их данные -->
-		<div v-for="user in users" :key="user.id">
-			<p>{{ user.name }} - {{ user.salary }} - {{ user.age }}</p>
-			<!-- Кнопка, которая вызывает метод родителя с передачей данных -->
-			<button @click="sendToParent(user.name, user.salary)">
-				Send to Parent
-			</button>
-		</div>
+		<!-- Кнопка, по клику на которую испускается событие -->
+		<button @click="sendEvent">Click Me</button>
 	</div>
 </template>
 
 <script>
 export default {
-	data() {
-		return {
-			users: [
-				{ id: 1, name: 'name1', salary: 100, age: 30 },
-				{ id: 2, name: 'name2', salary: 200, age: 40 },
-				{ id: 3, name: 'name3', salary: 300, age: 50 },
-			],
-		}
-	},
 	methods: {
-		// Метод родителя
-		func(name, salary) {
-			console.log(name, salary)
-		},
-		// Метод, который передает данные родителю через $emit
-		sendToParent(name, salary) {
-			this.func(name, salary) // Вызываем метод родителя напрямую
+		// Метод, который испускает событие
+		sendEvent() {
+			this.$emit('customEvent', 'Hello from child') // Испускаем событие с данными
 		},
 	},
 }
