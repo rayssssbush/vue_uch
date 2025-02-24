@@ -5,18 +5,27 @@ import TheWelcome from './components/TheWelcome.vue'
 
 <template>
 	<div>
-		<div v-for="(user, index) in users" :key="user.id">
-			<!-- Компонент для редактирования данных работника -->
-			<div>
-				<p>Name: <input v-model="editableUsers[index].name" /></p>
-				<p>
-					Salary: <input v-model="editableUsers[index].salary" type="number" />
-				</p>
-				<p>Age: <input v-model="editableUsers[index].age" type="number" /></p>
-				<button @click="saveChanges(index)">Save</button>
-				<button @click="cancelChanges(index)">Cancel</button>
-			</div>
-		</div>
+		<!-- Форма для добавления нового работника -->
+		<h2>Add New Employee</h2>
+		<form @submit.prevent="addEmployee">
+			<label for="name">Name:</label>
+			<input type="text" id="name" v-model="newEmployee.name" required />
+
+			<label for="salary">Salary:</label>
+			<input type="number" id="salary" v-model="newEmployee.salary" required />
+
+			<label for="age">Age:</label>
+			<input type="number" id="age" v-model="newEmployee.age" required />
+
+			<button type="submit">Add Employee</button>
+		</form>
+
+		<h3>Employee List</h3>
+		<ul>
+			<li v-for="employee in users" :key="employee.id">
+				{{ employee.name }} - {{ employee.salary }} - {{ employee.age }}
+			</li>
+		</ul>
 	</div>
 </template>
 
@@ -24,37 +33,46 @@ import TheWelcome from './components/TheWelcome.vue'
 export default {
 	data() {
 		return {
+			newEmployee: {
+				name: '',
+				salary: '',
+				age: '',
+			},
 			users: [
 				{ id: 1, name: 'name1', salary: 100, age: 30 },
 				{ id: 2, name: 'name2', salary: 200, age: 40 },
 				{ id: 3, name: 'name3', salary: 300, age: 50 },
 			],
-			editableUsers: [
-				{ ...this.users[0] },
-				{ ...this.users[1] },
-				{ ...this.users[2] },
-			],
 		}
 	},
 	methods: {
-		// Сохранение изменений
-		saveChanges(index) {
-			this.$set(this.users, index, this.editableUsers[index])
-		},
-		// Отмена изменений
-		cancelChanges(index) {
-			this.editableUsers[index] = { ...this.users[index] }
+		addEmployee() {
+			// Генерация нового ID для добавленного работника
+			const newId = this.users.length + 1
+			// Добавление нового работника в список
+			this.users.push({ ...this.newEmployee, id: newId })
+			// Очистка формы после добавления
+			this.newEmployee.name = ''
+			this.newEmployee.salary = ''
+			this.newEmployee.age = ''
 		},
 	},
 }
 </script>
 
 <style scoped>
+form {
+	margin-bottom: 20px;
+}
+
 input {
 	margin: 5px;
+	padding: 5px;
 }
+
 button {
-	margin: 5px;
+	padding: 5px 10px;
+	margin-top: 10px;
 }
 </style>
 
