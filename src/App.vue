@@ -4,34 +4,41 @@ import TheWelcome from './components/TheWelcome.vue'
 </script>
 
 <template>
-  <div>
-    <!-- №1: Формируем верстку с <div> и <p>, включая <p class="divider"> -->
-    <div v-for="item in items" :key="item">
-      <p>{{ item }}</p>
-      <p class="divider"></p>
-    </div>
+	<!-- №1: Список ссылок -->
+	<ul>
+		<li v-for="item in hrefs" :key="item.href">
+			<a :href="item.href">{{ item.text }}</a>
+		</li>
+	</ul>
 
-    <!-- №2: Формируем верстку с <ul> и <li>, включая <li class="divider"> -->
-    <ul>
-      <li v-for="(item, index) in items" :key="item">
-        {{ item }}
-        <!-- Добавляем divider после каждого элемента, кроме последнего -->
-        <li v-if="index < items.length - 1" class="divider"></li>
-      </li>
-    </ul>
-  </div>
+	<!-- №2: Таблица с продуктами -->
+	<table>
+		<tr v-for="product in products" :key="product.name">
+			<td>{{ product.name }}</td>
+			<td>{{ product.price }}</td>
+			<td>{{ product.quantity }}</td>
+		</tr>
+	</table>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      items: [1, 2, 3],
-    };
-  },
-};
+	data() {
+		return {
+			hrefs: [
+				{ href: '1.html', text: 'text1' },
+				{ href: '2.html', text: 'text2' },
+				{ href: '3.html', text: 'text3' },
+			],
+			products: [
+				{ name: 'product1', price: 100, quantity: 5 },
+				{ name: 'product2', price: 200, quantity: 4 },
+				{ name: 'product3', price: 300, quantity: 3 },
+			],
+		}
+	},
+}
 </script>
-
 
 <style scoped>
 #app {
