@@ -5,32 +5,28 @@ import TheWelcome from './components/TheWelcome.vue'
 
 <template>
 	<div>
-		<!-- Чекбоксы для выбора языков -->
+		<!-- Группа радио кнопок для выбора родного языка -->
 		<div>
 			<label>
-				<input type="checkbox" value="JavaScript" v-model="languages" />
-				JavaScript
+				<input type="radio" value="Russian" v-model="nativeLanguage" /> Русский
 			</label>
 			<label>
-				<input type="checkbox" value="Python" v-model="languages" /> Python
+				<input type="radio" value="English" v-model="nativeLanguage" /> English
 			</label>
 			<label>
-				<input type="checkbox" value="Java" v-model="languages" /> Java
-			</label>
-			<label>
-				<input type="checkbox" value="C++" v-model="languages" /> C++
-			</label>
-			<label>
-				<input type="checkbox" value="Ruby" v-model="languages" /> Ruby
+				<input type="radio" value="Spanish" v-model="nativeLanguage" /> Español
 			</label>
 		</div>
 
-		<!-- Вывод выбранных языков в виде списка -->
-		<ul>
-			<li v-for="(language, index) in languages" :key="index">
-				{{ language }}
-			</li>
-		</ul>
+		<!-- Абзац, показывающий выбранный язык -->
+		<p>Вы выбрали: {{ nativeLanguage }}</p>
+
+		<!-- Абзацы с текстами на разных языках -->
+		<div>
+			<p v-if="nativeLanguage === 'Russian'">Привет, как дела?</p>
+			<p v-if="nativeLanguage === 'English'">Hello, how are you?</p>
+			<p v-if="nativeLanguage === 'Spanish'">Hola, ¿cómo estás?</p>
+		</div>
 	</div>
 </template>
 
@@ -38,7 +34,7 @@ import TheWelcome from './components/TheWelcome.vue'
 export default {
 	data() {
 		return {
-			languages: [], // Массив для выбранных языков
+			nativeLanguage: '', // Переменная для хранения выбранного языка
 		}
 	},
 }
