@@ -5,15 +5,8 @@ import TheWelcome from './components/TheWelcome.vue'
 
 <template>
 	<div>
-		<!-- Абзац с динамическим классом, который скрывает элемент -->
-		<p :class="{ hidden: obj.hidden }">
-			Этот абзац может быть скрыт или показан.
-		</p>
-
-		<!-- Кнопки для управления состоянием -->
-		<button @click="showElement">Показать элемент</button>
-		<button @click="hideElement">Скрыть элемент</button>
-		<button @click="toggleElement">Тогглить элемент</button>
+		<!-- Применение классов из объекта -->
+		<p :class="classObject">Этот абзац имеет динамически изменяемые классы.</p>
 	</div>
 </template>
 
@@ -21,29 +14,22 @@ import TheWelcome from './components/TheWelcome.vue'
 export default {
 	data() {
 		return {
-			obj: {
-				hidden: true, // Скрыто по умолчанию
+			classObject: {
+				active: true, // Класс "active" будет добавлен
+				valid: false, // Класс "valid" не будет добавлен
 			},
 		}
-	},
-	methods: {
-		showElement() {
-			this.obj.hidden = false // Показываем элемент
-		},
-		hideElement() {
-			this.obj.hidden = true // Скрываем элемент
-		},
-		toggleElement() {
-			this.obj.hidden = !this.obj.hidden // Переключаем видимость элемента
-		},
 	},
 }
 </script>
 
 <style scoped>
-/* Класс для скрытия элемента */
-.hidden {
-	display: none;
+/* Стили для классов */
+.active {
+	color: green;
+}
+.valid {
+	color: blue;
 }
 </style>
 
