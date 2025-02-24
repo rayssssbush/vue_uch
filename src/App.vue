@@ -5,17 +5,32 @@ import TheWelcome from './components/TheWelcome.vue'
 
 <template>
 	<div>
-		<!-- Кнопка, по клику на которую испускается событие -->
-		<button @click="sendEvent">Click Me</button>
+		<!-- Цикл для вывода каждого компонента Employee -->
+		<div v-for="(user, index) in users" :key="user.id">
+			<p>Name: {{ user.name }}</p>
+			<p>Salary: {{ user.salary }}</p>
+			<p>Age: {{ user.age }}</p>
+			<!-- Кнопка для удаления компонента -->
+			<button @click="removeEmployee(index)">Delete</button>
+		</div>
 	</div>
 </template>
 
 <script>
 export default {
+	data() {
+		return {
+			users: [
+				{ id: 1, name: 'name1', salary: 100, age: 30 },
+				{ id: 2, name: 'name2', salary: 200, age: 40 },
+				{ id: 3, name: 'name3', salary: 300, age: 50 },
+			],
+		}
+	},
 	methods: {
-		// Метод, который испускает событие
-		sendEvent() {
-			this.$emit('customEvent', 'Hello from child') // Испускаем событие с данными
+		// Метод для удаления работника по индексу
+		removeEmployee(index) {
+			this.users.splice(index, 1)
 		},
 	},
 }
