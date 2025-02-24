@@ -4,32 +4,13 @@ import TheWelcome from './components/TheWelcome.vue'
 </script>
 
 <template>
-	<div>
-		<!-- Применяем динамические классы в зависимости от значений isValid и isDisabled -->
-		<p :class="{ valid: isValid, disabled: isDisabled }">
-			Текст с динамическими классами.
-		</p>
-	</div>
+	<p class="highlighted-text">Этот текст будет зеленым на желтом фоне.</p>
 </template>
 
-<script>
-export default {
-	data() {
-		return {
-			isValid: true, // Если true, добавится класс 'valid'
-			isDisabled: true, // Если true, добавится класс 'disabled'
-		}
-	},
-}
-</script>
-
 <style scoped>
-/* Стили для классов */
-.valid {
-	color: green;
-}
-.disabled {
-	color: gray;
+.highlighted-text {
+	color: green; /* Зеленый текст */
+	background-color: yellow; /* Желтый фон */
 }
 </style>
 
