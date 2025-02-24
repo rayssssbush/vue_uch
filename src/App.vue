@@ -5,15 +5,11 @@ import TheWelcome from './components/TheWelcome.vue'
 
 <template>
 	<div>
-		<!-- Задача 1: Вывод текста из textarea -->
-		<textarea v-model="text" placeholder="Введите текст"></textarea>
-		<p>{{ text }}</p>
+		<!-- Чекбокс -->
+		<input type="checkbox" v-model="isChecked" /> Показать абзац
 
-		<!-- Задача 2: Вывод слов из textarea в виде списка -->
-		<button @click="convertTextToList">Преобразовать в список</button>
-		<ul>
-			<li v-for="(word, index) in words" :key="index">{{ word }}</li>
-		</ul>
+		<!-- Абзац, который показывается или скрывается в зависимости от состояния чекбокса -->
+		<p v-if="isChecked">Этот абзац отображается, если чекбокс отмечен.</p>
 	</div>
 </template>
 
@@ -21,14 +17,8 @@ import TheWelcome from './components/TheWelcome.vue'
 export default {
 	data() {
 		return {
-			text: '',
-			words: [],
+			isChecked: false, // Состояние чекбокса
 		}
-	},
-	methods: {
-		convertTextToList() {
-			this.words = this.text.split(' ').filter(word => word.length > 0) // Разделяем по пробелам и фильтруем пустые слова
-		},
 	},
 }
 </script>
