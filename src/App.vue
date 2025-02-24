@@ -5,11 +5,11 @@ import TheWelcome from './components/TheWelcome.vue'
 
 <template>
 	<div>
-		<!-- Вывод каждого элемента массива в отдельном абзаце -->
-		<p v-for="(item, index) in arr" :key="index">{{ item }}</p>
-
-		<!-- Вывод суммы элементов массива -->
-		<p>Сумма элементов массива: {{ arr.reduce((sum, num) => sum + num, 0) }}</p>
+		<!-- Вывод суммы элементов объекта -->
+		<p>
+			Сумма элементов объекта:
+			{{ Object.values(obj).reduce((sum, value) => sum + value, 0) }}
+		</p>
 	</div>
 </template>
 
@@ -17,8 +17,7 @@ import TheWelcome from './components/TheWelcome.vue'
 export default {
 	data() {
 		return {
-			arr: ['x', 'y', 'z'], // для первого случая
-			// arr: [1, 2, 3],     // для второго случая
+			obj: { x: 1, y: 2, z: 3 },
 		}
 	},
 }
