@@ -5,24 +5,42 @@ import TheWelcome from './components/TheWelcome.vue'
 
 <template>
 	<div>
-		<!-- Инпут для текста -->
-		<input v-model="inputText" placeholder="Введите текст" />
-		<p>{{ inputText }}</p>
-
-		<!-- Инпут для текста, вывод в верхнем регистре -->
+		<!-- Задача 1: Квадратный корень числа -->
 		<input
-			v-model="inputTextUpperCase"
-			placeholder="Введите текст для верхнего регистра"
-		/>
-		<p>{{ inputTextUpperCase.toUpperCase() }}</p>
-
-		<!-- Инпут для числа, вывод квадрата числа -->
-		<input
-			v-model.number="inputNumber"
+			v-model.number="numberForSqrt"
 			type="number"
 			placeholder="Введите число"
 		/>
-		<p>{{ inputNumber ** 2 }}</p>
+		<button @click="calculateSqrt">Посчитать квадратный корень</button>
+		<p>{{ sqrtResult }}</p>
+
+		<!-- Задача 2: Сумма двух чисел -->
+		<input
+			v-model.number="firstNumber"
+			type="number"
+			placeholder="Введите первое число"
+		/>
+		<input
+			v-model.number="secondNumber"
+			type="number"
+			placeholder="Введите второе число"
+		/>
+		<button @click="calculateSum">Посчитать сумму</button>
+		<p>{{ sumResult }}</p>
+
+		<!-- Задача 3: Обмен текста между инпутами -->
+		<input v-model="text1" placeholder="Введите текст в первый инпут" />
+		<input v-model="text2" placeholder="Введите текст во второй инпут" />
+		<button @click="swapText">Поменять текст</button>
+		<p>Текст в первом инпуте: {{ text1 }}</p>
+		<p>Текст во втором инпуте: {{ text2 }}</p>
+
+		<!-- Задача 4: Разделение ФИО на фамилию, имя и отчество -->
+		<input v-model="fullName" placeholder="Введите ФИО" />
+		<button @click="splitFullName">Разделить ФИО</button>
+		<p>Фамилия: {{ surname }}</p>
+		<p>Имя: {{ name }}</p>
+		<p>Отчество: {{ patronymic }}</p>
 	</div>
 </template>
 
@@ -30,10 +48,43 @@ import TheWelcome from './components/TheWelcome.vue'
 export default {
 	data() {
 		return {
-			inputText: '',
-			inputTextUpperCase: '',
-			inputNumber: 0,
+			numberForSqrt: 0,
+			sqrtResult: null,
+			firstNumber: 0,
+			secondNumber: 0,
+			sumResult: null,
+			text1: '',
+			text2: '',
+			fullName: '',
+			surname: '',
+			name: '',
+			patronymic: '',
 		}
+	},
+	methods: {
+		calculateSqrt() {
+			this.sqrtResult = Math.sqrt(this.numberForSqrt)
+		},
+		calculateSum() {
+			this.sumResult = this.firstNumber + this.secondNumber
+		},
+		swapText() {
+			const temp = this.text1
+			this.text1 = this.text2
+			this.text2 = temp
+		},
+		splitFullName() {
+			const names = this.fullName.split(' ')
+			if (names.length === 3) {
+				this.surname = names[0]
+				this.name = names[1]
+				this.patronymic = names[2]
+			} else {
+				this.surname = ''
+				this.name = ''
+				this.patronymic = ''
+			}
+		},
 	},
 }
 </script>
