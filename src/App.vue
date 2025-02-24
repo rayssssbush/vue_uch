@@ -5,19 +5,15 @@ import TheWelcome from './components/TheWelcome.vue'
 
 <template>
 	<div>
-		<!-- Задача 1: Добавление элемента в конец списка -->
 		<ul>
-			<li v-for="(item, index) in items" :key="index">{{ item }}</li>
+			<li
+				v-for="(item, index) in items"
+				:key="index"
+				@click="removeItem(index)"
+			>
+				{{ item }}
+			</li>
 		</ul>
-		<input v-model="newItem" placeholder="Введите новый элемент" />
-		<button @click="addItemToEnd">Добавить в конец</button>
-
-		<!-- Задача 2: Добавление элемента в начало списка -->
-		<ul>
-			<li v-for="(item, index) in itemsReversed" :key="index">{{ item }}</li>
-		</ul>
-		<input v-model="newItem" placeholder="Введите новый элемент" />
-		<button @click="addItemToStart">Добавить в начало</button>
 	</div>
 </template>
 
@@ -25,30 +21,13 @@ import TheWelcome from './components/TheWelcome.vue'
 export default {
 	data() {
 		return {
-			items: ['Элемент 1', 'Элемент 2', 'Элемент 3'],
-			newItem: '', // Текст для добавления в список
+			items: ['Элемент 1', 'Элемент 2', 'Элемент 3', 'Элемент 4'],
 		}
 	},
-	computed: {
-		// Создаем вычисляемое свойство для отображения списка с элементами в обратном порядке
-		itemsReversed() {
-			return [...this.items].reverse()
-		},
-	},
 	methods: {
-		// Задача 1: Добавляем новый элемент в конец списка
-		addItemToEnd() {
-			if (this.newItem.trim()) {
-				this.items.push(this.newItem)
-				this.newItem = '' // Очищаем инпут
-			}
-		},
-		// Задача 2: Добавляем новый элемент в начало списка
-		addItemToStart() {
-			if (this.newItem.trim()) {
-				this.items.unshift(this.newItem)
-				this.newItem = '' // Очищаем инпут
-			}
+		// Метод для удаления элемента из массива
+		removeItem(index) {
+			this.items.splice(index, 1) // Удаляем элемент по индексу
 		},
 	},
 }
