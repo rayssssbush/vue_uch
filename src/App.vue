@@ -4,21 +4,52 @@ import TheWelcome from './components/TheWelcome.vue'
 </script>
 
 <template>
-	<ul>
-		<li v-for="product in products" :key="product.id">{{ product.name }}</li>
-	</ul>
+	<div>
+		<!-- Вывод списка -->
+		<ul>
+			<li v-for="(item, index) in items" :key="index">{{ item }}</li>
+		</ul>
+
+		<!-- Кнопки для различных операций -->
+		<button @click="addItem">Добавить элемент в конец</button>
+		<button @click="removeFirstItem">Удалить первый элемент</button>
+		<button @click="removeLastItem">Удалить последний элемент</button>
+		<button @click="removePenultimateItem">
+			Удалить предпоследний элемент
+		</button>
+		<button @click="sortItems">Отсортировать</button>
+		<button @click="reverseItems">Развернуть список</button>
+	</div>
 </template>
 
 <script>
 export default {
 	data() {
 		return {
-			products: [
-				{ id: 1, name: 'product1' },
-				{ id: 2, name: 'product2' },
-				{ id: 3, name: 'product3' },
-			],
+			items: ['item1', 'item2', 'item3'],
 		}
+	},
+	methods: {
+		addItem() {
+			this.items.push('newItem')
+		},
+		removeFirstItem() {
+			this.items.shift()
+		},
+		removeLastItem() {
+			this.items.pop()
+		},
+		removePenultimateItem() {
+			if (this.items.length > 1) {
+				this.items.splice(this.items.length - 2, 1)
+			}
+		},
+		sortItems() {
+			this.items.sort()
+		},
+		reverseItems() {
+			this.items.reverse()
+		},
 	},
 }
 </script>
