@@ -4,29 +4,34 @@ import TheWelcome from './components/TheWelcome.vue'
 </script>
 
 <template>
-	<div>
-		<!-- Задача 1: Каждый элемент массива в своем div -->
-		<div v-for="item in items" :key="item">{{ item }}</div>
+  <div>
+    <!-- №1: Формируем верстку с <div> и <p>, включая <p class="divider"> -->
+    <div v-for="item in items" :key="item">
+      <p>{{ item }}</p>
+      <p class="divider"></p>
+    </div>
 
-		<!-- Задача 2: Квадрат каждого элемента массива в своем div -->
-		<div v-for="item in items" :key="item">{{ item * item }}</div>
-
-		<!-- Задача 3: Элементы массива в виде списка ul -->
-		<ul>
-			<li v-for="item in items" :key="item">{{ item }}</li>
-		</ul>
-	</div>
+    <!-- №2: Формируем верстку с <ul> и <li>, включая <li class="divider"> -->
+    <ul>
+      <li v-for="(item, index) in items" :key="item">
+        {{ item }}
+        <!-- Добавляем divider после каждого элемента, кроме последнего -->
+        <li v-if="index < items.length - 1" class="divider"></li>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
 export default {
-	data() {
-		return {
-			items: [1, 2, 3, 4, 5],
-		}
-	},
-}
+  data() {
+    return {
+      items: [1, 2, 3],
+    };
+  },
+};
 </script>
+
 
 <style scoped>
 #app {
