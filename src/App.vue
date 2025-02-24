@@ -4,31 +4,18 @@ import TheWelcome from './components/TheWelcome.vue'
 </script>
 <template>
 	<div>
-		<p>Сегодня: {{ getCurrentDay() }}</p>
+		<!-- Кнопки для вывода квадратов чисел -->
+		<button @click="showSquare(2)">Квадрат числа 2</button>
+		<button @click="showSquare(3)">Квадрат числа 3</button>
 	</div>
 </template>
 
 <script>
 export default {
 	methods: {
-		// Вспомогательный метод для получения дня недели по числу
-		getDayByNumber(dayNumber) {
-			const days = [
-				'Воскресенье',
-				'Понедельник',
-				'Вторник',
-				'Среда',
-				'Четверг',
-				'Пятница',
-				'Суббота',
-			]
-			return days[dayNumber]
-		},
-
-		// Основной метод для вывода текущего дня недели
-		getCurrentDay() {
-			const currentDayNumber = new Date().getDay() // Получаем число дня недели (0 - Воскресенье, 1 - Понедельник и т.д.)
-			return this.getDayByNumber(currentDayNumber)
+		// Метод для вывода квадрата числа через alert
+		showSquare(number) {
+			alert(`Квадрат числа ${number}: ${number * number}`)
 		},
 	},
 }
@@ -36,6 +23,18 @@ export default {
 
 <style scoped>
 /* Стили по желанию */
+button {
+	padding: 10px 20px;
+	background-color: #4caf50;
+	color: white;
+	border: none;
+	cursor: pointer;
+	margin: 5px;
+}
+
+button:hover {
+	background-color: #45a049;
+}
 </style>
 
 <style scoped>
