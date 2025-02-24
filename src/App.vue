@@ -5,8 +5,10 @@ import TheWelcome from './components/TheWelcome.vue'
 
 <template>
 	<div>
-		<!-- Применение классов из объекта -->
-		<p :class="classObject">Этот абзац имеет динамически изменяемые классы.</p>
+		<!-- Применяем динамические классы в зависимости от значений isValid и isDisabled -->
+		<p :class="{ valid: isValid, disabled: isDisabled }">
+			Текст с динамическими классами.
+		</p>
 	</div>
 </template>
 
@@ -14,10 +16,8 @@ import TheWelcome from './components/TheWelcome.vue'
 export default {
 	data() {
 		return {
-			classObject: {
-				active: true, // Класс "active" будет добавлен
-				valid: false, // Класс "valid" не будет добавлен
-			},
+			isValid: true, // Если true, добавится класс 'valid'
+			isDisabled: true, // Если true, добавится класс 'disabled'
 		}
 	},
 }
@@ -25,11 +25,11 @@ export default {
 
 <style scoped>
 /* Стили для классов */
-.active {
+.valid {
 	color: green;
 }
-.valid {
-	color: blue;
+.disabled {
+	color: gray;
 }
 </style>
 
