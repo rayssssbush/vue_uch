@@ -5,95 +5,27 @@ import TheWelcome from './components/TheWelcome.vue'
 
 <template>
 	<div>
-		<!-- Селект для выбора дня недели -->
-		<select v-model="selectedDay">
-			<option v-for="day in days" :key="day" :value="day">{{ day }}</option>
-		</select>
-		<p>Вы выбрали: {{ selectedDay }}</p>
-
-		<!-- Селект для выбора дня, месяца и года -->
-		<div>
-			<select v-model="selectedDayOfMonth">
-				<option v-for="i in 31" :key="i" :value="i">{{ i }}</option>
-			</select>
-			<select v-model="selectedMonth">
-				<option v-for="month in months" :key="month" :value="month">
-					{{ month }}
-				</option>
-			</select>
-			<select v-model="selectedYear">
-				<option v-for="year in years" :key="year" :value="year">
-					{{ year }}
-				</option>
-			</select>
-		</div>
-
-		<p>
-			Вы выбрали: {{ selectedDayOfMonth }} {{ selectedMonth }}
-			{{ selectedYear }}
-		</p>
-	</div>
-</template>
-
-<script>
-export default {
-	data() {
-		const today = new Date()
-		return {
-			days: [
-				'Понедельник',
-				'Вторник',
-				'Среда',
-				'Четверг',
-				'Пятница',
-				'Суббота',
-				'Воскресенье',
-			],
-			months: [
-				'Январь',
-				'Февраль',
-				'Март',
-				'Апрель',
-				'Май',
-				'Июнь',
-				'Июль',
-				'Август',
-				'Сентябрь',
-				'Октябрь',
-				'Ноябрь',
-				'Декабрь',
-			],
-			years: Array.from(
-				{ length: 101 },
-				(_, i) => today.getFullYear() - 50 + i
-			), // Пример диапазона годов
-			selectedDay: this.days[today.getDay()], // Текущий день недели
-			selectedDayOfMonth: today.getDate(), // Текущий день месяца
-			selectedMonth: this.months[today.getMonth()], // Текущий месяц
-			selectedYear: today.getFullYear(), // Текущий год
-		}
-	},
-}
-</script>
-<template>
-	<div>
-		<!-- Инпут -->
+		<!-- Задача 1: Инпут и вывод текста при нажатии Enter -->
 		<input
-			v-bind:disabled="isDisabled"
-			type="text"
+			v-model="inputText"
+			@keyup.enter="displayText"
 			placeholder="Введите текст"
 		/>
+		<p>{{ displayedText }}</p>
 
-		<!-- Кнопка для блокировки/отблокировки инпута -->
-		<button @click="toggleInput">Toggle Input</button>
+		<!-- Задача 2: Ссылка с проверкой нажатия Ctrl -->
+		<a href="#" @click="handleLinkClick">Нажмите на ссылку с зажатым Ctrl</a>
+		<p>{{ linkMessage }}</p>
 
-		<!-- Чекбокс для управления состоянием инпута -->
-		<label>
-			<input type="checkbox" v-model="isChecked" />
-			Блокировка инпута
-		</label>
-
-		<p>Инпут {{ isDisabled ? 'заблокирован' : 'отблокирован' }}</p>
+		<!-- Задача 3: Ссылка с различными действиями на кнопки мыши -->
+		<a
+			href="#"
+			@mousedown.left="mouseClick('left')"
+			@mousedown.right="mouseClick('right')"
+			@mousedown.middle="mouseClick('middle')"
+			>Нажмите на ссылку</a
+		>
+		<p>{{ mouseMessage }}</p>
 	</div>
 </template>
 
@@ -101,20 +33,30 @@ export default {
 export default {
 	data() {
 		return {
-			isDisabled: false, // Начальное состояние инпута
-			isChecked: true, // Чекбокс по умолчанию отмечен
+			inputText: '', // Для хранения текста из инпута
+			displayedText: '', // Для отображения текста при нажатии Enter
+			linkMessage: '', // Сообщение для ссылки с Ctrl
+			mouseMessage: '', // Сообщение для мышиных кнопок
 		}
 	},
-	watch: {
-		// Если чекбокс изменяет свое состояние, обновляем состояние инпута
-		isChecked(newValue) {
-			this.isDisabled = !newValue
-		},
-	},
 	methods: {
-		// Метод для переключения блокировки инпута
-		toggleInput() {
-			this.isDisabled = !this.isDisabled
+		// Задача 1: Отображаем введенный текст при нажатии Enter
+		displayText() {
+			this.displayedText = this.inputText
+		},
+
+		// Задача 2: Проверка нажатия на ссылку с зажатым Ctrl
+		handleLinkClick(event) {
+			if (event.ctrlKey) {
+				this.linkMessage = 'Ctrl клавиша зажата!'
+			} else {
+				this.linkMessage = 'Ctrl клавиша не зажата'
+			}
+		},
+
+		// Задача 3: Определение какой кнопкой мыши был совершен клик
+		mouseClick(button) {
+			this.mouseMessage = button
 		},
 	},
 }
