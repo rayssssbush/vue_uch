@@ -4,12 +4,11 @@ import TheWelcome from './components/TheWelcome.vue'
 </script>
 <template>
 	<div>
-		<!-- Абзац для вывода содержимого свойства text -->
-		<p>{{ text }}</p>
+		<!-- Вывод полной стоимости (цена * количество) -->
+		<p>Полная стоимость: {{ price }}</p>
 
-		<!-- Кнопки для изменения значения text -->
-		<button @click="changeText('Первое значение')">Первое значение</button>
-		<button @click="changeText('Второе значение')">Второе значение</button>
+		<!-- Кнопка для изменения стоимости продукта -->
+		<button @click="changeCost(200)">Изменить цену на 200</button>
 	</div>
 </template>
 
@@ -17,13 +16,20 @@ import TheWelcome from './components/TheWelcome.vue'
 export default {
 	data() {
 		return {
-			text: 'Начальное значение', // Исходное значение свойства text
+			cost: 100, // Начальная цена продукта
+			amount: 5, // Количество продуктов
 		}
 	},
+	computed: {
+		// Вычисляемое свойство для расчета полной стоимости
+		price() {
+			return this.cost * this.amount
+		},
+	},
 	methods: {
-		// Метод для изменения значения text
-		changeText(newText) {
-			this.text = newText
+		// Метод для изменения стоимости
+		changeCost(newCost) {
+			this.cost = newCost
 		},
 	},
 }
@@ -36,7 +42,7 @@ button {
 	color: white;
 	border: none;
 	cursor: pointer;
-	margin: 5px;
+	margin-top: 20px;
 }
 
 button:hover {
