@@ -5,7 +5,8 @@ import TheWelcome from './components/TheWelcome.vue'
 
 <template>
 	<div>
-		<a :href="href">{{ text }}</a>
+		<p>Квадрат числа: {{ num * num }}</p>
+		<p>Сумма чисел: {{ num1 + num2 + num3 }}</p>
 	</div>
 </template>
 
@@ -13,12 +14,18 @@ import TheWelcome from './components/TheWelcome.vue'
 export default {
 	data() {
 		return {
-			text: 'page',
-			href: 'page.html',
+			num: 5,
+			num1: 1,
+			num2: 2,
+			num3: 3,
 		}
 	},
 }
 </script>
+
+<style scoped>
+/* Стили по желанию */
+</style>
 
 <style scoped>
 #app {
