@@ -5,21 +5,27 @@ import TheWelcome from './components/TheWelcome.vue'
 
 <template>
 	<div>
-		<List :items="items" />
+		<p>Name: {{ name }}</p>
+		<p>Salary: {{ salary }}</p>
+		<p>Age: {{ age }}</p>
 	</div>
 </template>
 
 <script>
-import List from './List.vue'
-
 export default {
-	components: {
-		List,
-	},
-	data() {
-		return {
-			items: ['Apple', 'Banana', 'Orange', 'Grape'],
-		}
+	props: {
+		name: {
+			type: String,
+			required: true,
+		},
+		salary: {
+			type: Number,
+			required: true,
+		},
+		age: {
+			type: Number,
+			required: true,
+		},
 	},
 }
 </script>
