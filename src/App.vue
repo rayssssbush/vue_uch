@@ -4,21 +4,29 @@ import TheWelcome from './components/TheWelcome.vue'
 </script>
 
 <template>
-	<div>
+	<div class="container">
 		<!-- Вывод списка -->
-		<ul>
-			<li v-for="(item, index) in items" :key="index">{{ item }}</li>
+		<ul class="item-list">
+			<li v-for="(item, index) in items" :key="index" class="item">
+				{{ item }}
+			</li>
 		</ul>
 
 		<!-- Кнопки для различных операций -->
-		<button @click="addItem">Добавить элемент в конец</button>
-		<button @click="removeFirstItem">Удалить первый элемент</button>
-		<button @click="removeLastItem">Удалить последний элемент</button>
-		<button @click="removePenultimateItem">
-			Удалить предпоследний элемент
-		</button>
-		<button @click="sortItems">Отсортировать</button>
-		<button @click="reverseItems">Развернуть список</button>
+		<div class="buttons">
+			<button @click="addItem" class="button">Добавить элемент в конец</button>
+			<button @click="removeFirstItem" class="button">
+				Удалить первый элемент
+			</button>
+			<button @click="removeLastItem" class="button">
+				Удалить последний элемент
+			</button>
+			<button @click="removePenultimateItem" class="button">
+				Удалить предпоследний элемент
+			</button>
+			<button @click="sortItems" class="button">Отсортировать</button>
+			<button @click="reverseItems" class="button">Развернуть список</button>
+		</div>
 	</div>
 </template>
 
@@ -53,6 +61,60 @@ export default {
 	},
 }
 </script>
+
+<style scoped>
+/* Основные стили контейнера */
+.container {
+	font-family: Arial, sans-serif;
+	padding: 20px;
+}
+
+/* Стили для списка */
+.item-list {
+	list-style-type: none;
+	padding: 0;
+	margin-bottom: 20px;
+}
+
+.item {
+	font-size: 18px;
+	background-color: #f4f4f4;
+	margin: 5px 0;
+	padding: 10px;
+	border-radius: 5px;
+	transition: background-color 0.3s ease;
+}
+
+.item:hover {
+	background-color: #e0e0e0;
+}
+
+/* Стили для кнопок */
+.buttons {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.button {
+	padding: 10px 15px;
+	background-color: #007bff;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 16px;
+	transition: background-color 0.3s ease;
+}
+
+.button:hover {
+	background-color: #0056b3;
+}
+
+.button:active {
+	background-color: #004085;
+}
+</style>
 
 <style scoped>
 #app {
