@@ -2,10 +2,23 @@
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
 </script>
-
 <template>
 	<div>
-		<button @click="showDate">Показать текущую дату</button>
+		<!-- Кнопка для вывода даты по клику -->
+		<button @click="showDate">Показать текущую дату (клик)</button>
+
+		<!-- Элемент для вывода даты по наведению -->
+		<div
+			@mouseover="showDate"
+			style="
+				margin-top: 20px;
+				padding: 10px;
+				background-color: lightblue;
+				text-align: center;
+			"
+		>
+			Наведите мышь, чтобы увидеть дату
+		</div>
 	</div>
 </template>
 
@@ -22,6 +35,21 @@ export default {
 
 <style scoped>
 /* Стили по желанию */
+button {
+	padding: 10px 20px;
+	background-color: #4caf50;
+	color: white;
+	border: none;
+	cursor: pointer;
+}
+
+button:hover {
+	background-color: #45a049;
+}
+
+div {
+	cursor: pointer;
+}
 </style>
 
 <style scoped>
