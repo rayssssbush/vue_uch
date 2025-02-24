@@ -4,15 +4,39 @@ import TheWelcome from './components/TheWelcome.vue'
 </script>
 
 <template>
-	<p class="highlighted-text">Этот текст будет зеленым на желтом фоне.</p>
+	<div>
+		<!-- Инпут для текста -->
+		<input v-model="inputText" placeholder="Введите текст" />
+		<p>{{ inputText }}</p>
+
+		<!-- Инпут для текста, вывод в верхнем регистре -->
+		<input
+			v-model="inputTextUpperCase"
+			placeholder="Введите текст для верхнего регистра"
+		/>
+		<p>{{ inputTextUpperCase.toUpperCase() }}</p>
+
+		<!-- Инпут для числа, вывод квадрата числа -->
+		<input
+			v-model.number="inputNumber"
+			type="number"
+			placeholder="Введите число"
+		/>
+		<p>{{ inputNumber ** 2 }}</p>
+	</div>
 </template>
 
-<style scoped>
-.highlighted-text {
-	color: green; /* Зеленый текст */
-	background-color: yellow; /* Желтый фон */
+<script>
+export default {
+	data() {
+		return {
+			inputText: '',
+			inputTextUpperCase: '',
+			inputNumber: 0,
+		}
+	},
 }
-</style>
+</script>
 
 <style scoped>
 #app {
