@@ -5,8 +5,14 @@ import TheWelcome from './components/TheWelcome.vue'
 
 <template>
 	<div>
-		<button @click="functionOne">Call Function One</button>
-		<button @click="functionTwo">Call Function Two</button>
+		<!-- Перебираем массив пользователей и отображаем их данные -->
+		<div v-for="user in users" :key="user.id">
+			<p>{{ user.name }} - {{ user.salary }} - {{ user.age }}</p>
+			<!-- Кнопка, которая вызывает метод родителя с передачей данных -->
+			<button @click="sendToParent(user.name, user.salary)">
+				Send to Parent
+			</button>
+		</div>
 	</div>
 </template>
 
@@ -22,11 +28,13 @@ export default {
 		}
 	},
 	methods: {
-		functionOne() {
-			alert('Function One was called!')
+		// Метод родителя
+		func(name, salary) {
+			console.log(name, salary)
 		},
-		functionTwo() {
-			alert('Function Two was called!')
+		// Метод, который передает данные родителю через $emit
+		sendToParent(name, salary) {
+			this.func(name, salary) // Вызываем метод родителя напрямую
 		},
 	},
 }
