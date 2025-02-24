@@ -5,42 +5,15 @@ import TheWelcome from './components/TheWelcome.vue'
 
 <template>
 	<div>
-		<!-- Задача 1: Квадратный корень числа -->
-		<input
-			v-model.number="numberForSqrt"
-			type="number"
-			placeholder="Введите число"
-		/>
-		<button @click="calculateSqrt">Посчитать квадратный корень</button>
-		<p>{{ sqrtResult }}</p>
+		<!-- Задача 1: Вывод текста из textarea -->
+		<textarea v-model="text" placeholder="Введите текст"></textarea>
+		<p>{{ text }}</p>
 
-		<!-- Задача 2: Сумма двух чисел -->
-		<input
-			v-model.number="firstNumber"
-			type="number"
-			placeholder="Введите первое число"
-		/>
-		<input
-			v-model.number="secondNumber"
-			type="number"
-			placeholder="Введите второе число"
-		/>
-		<button @click="calculateSum">Посчитать сумму</button>
-		<p>{{ sumResult }}</p>
-
-		<!-- Задача 3: Обмен текста между инпутами -->
-		<input v-model="text1" placeholder="Введите текст в первый инпут" />
-		<input v-model="text2" placeholder="Введите текст во второй инпут" />
-		<button @click="swapText">Поменять текст</button>
-		<p>Текст в первом инпуте: {{ text1 }}</p>
-		<p>Текст во втором инпуте: {{ text2 }}</p>
-
-		<!-- Задача 4: Разделение ФИО на фамилию, имя и отчество -->
-		<input v-model="fullName" placeholder="Введите ФИО" />
-		<button @click="splitFullName">Разделить ФИО</button>
-		<p>Фамилия: {{ surname }}</p>
-		<p>Имя: {{ name }}</p>
-		<p>Отчество: {{ patronymic }}</p>
+		<!-- Задача 2: Вывод слов из textarea в виде списка -->
+		<button @click="convertTextToList">Преобразовать в список</button>
+		<ul>
+			<li v-for="(word, index) in words" :key="index">{{ word }}</li>
+		</ul>
 	</div>
 </template>
 
@@ -48,42 +21,13 @@ import TheWelcome from './components/TheWelcome.vue'
 export default {
 	data() {
 		return {
-			numberForSqrt: 0,
-			sqrtResult: null,
-			firstNumber: 0,
-			secondNumber: 0,
-			sumResult: null,
-			text1: '',
-			text2: '',
-			fullName: '',
-			surname: '',
-			name: '',
-			patronymic: '',
+			text: '',
+			words: [],
 		}
 	},
 	methods: {
-		calculateSqrt() {
-			this.sqrtResult = Math.sqrt(this.numberForSqrt)
-		},
-		calculateSum() {
-			this.sumResult = this.firstNumber + this.secondNumber
-		},
-		swapText() {
-			const temp = this.text1
-			this.text1 = this.text2
-			this.text2 = temp
-		},
-		splitFullName() {
-			const names = this.fullName.split(' ')
-			if (names.length === 3) {
-				this.surname = names[0]
-				this.name = names[1]
-				this.patronymic = names[2]
-			} else {
-				this.surname = ''
-				this.name = ''
-				this.patronymic = ''
-			}
+		convertTextToList() {
+			this.words = this.text.split(' ').filter(word => word.length > 0) // Разделяем по пробелам и фильтруем пустые слова
 		},
 	},
 }
