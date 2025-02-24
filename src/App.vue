@@ -5,36 +5,72 @@ import TheWelcome from './components/TheWelcome.vue'
 
 <template>
 	<div>
-		<!-- Группа радио кнопок для выбора родного языка -->
+		<!-- Селект для выбора дня недели -->
+		<select v-model="selectedDay">
+			<option v-for="day in days" :key="day" :value="day">{{ day }}</option>
+		</select>
+		<p>Вы выбрали: {{ selectedDay }}</p>
+
+		<!-- Селект для выбора дня, месяца и года -->
 		<div>
-			<label>
-				<input type="radio" value="Russian" v-model="nativeLanguage" /> Русский
-			</label>
-			<label>
-				<input type="radio" value="English" v-model="nativeLanguage" /> English
-			</label>
-			<label>
-				<input type="radio" value="Spanish" v-model="nativeLanguage" /> Español
-			</label>
+			<select v-model="selectedDayOfMonth">
+				<option v-for="i in 31" :key="i" :value="i">{{ i }}</option>
+			</select>
+			<select v-model="selectedMonth">
+				<option v-for="month in months" :key="month" :value="month">
+					{{ month }}
+				</option>
+			</select>
+			<select v-model="selectedYear">
+				<option v-for="year in years" :key="year" :value="year">
+					{{ year }}
+				</option>
+			</select>
 		</div>
 
-		<!-- Абзац, показывающий выбранный язык -->
-		<p>Вы выбрали: {{ nativeLanguage }}</p>
-
-		<!-- Абзацы с текстами на разных языках -->
-		<div>
-			<p v-if="nativeLanguage === 'Russian'">Привет, как дела?</p>
-			<p v-if="nativeLanguage === 'English'">Hello, how are you?</p>
-			<p v-if="nativeLanguage === 'Spanish'">Hola, ¿cómo estás?</p>
-		</div>
+		<p>
+			Вы выбрали: {{ selectedDayOfMonth }} {{ selectedMonth }}
+			{{ selectedYear }}
+		</p>
 	</div>
 </template>
 
 <script>
 export default {
 	data() {
+		const today = new Date()
 		return {
-			nativeLanguage: '', // Переменная для хранения выбранного языка
+			days: [
+				'Понедельник',
+				'Вторник',
+				'Среда',
+				'Четверг',
+				'Пятница',
+				'Суббота',
+				'Воскресенье',
+			],
+			months: [
+				'Январь',
+				'Февраль',
+				'Март',
+				'Апрель',
+				'Май',
+				'Июнь',
+				'Июль',
+				'Август',
+				'Сентябрь',
+				'Октябрь',
+				'Ноябрь',
+				'Декабрь',
+			],
+			years: Array.from(
+				{ length: 101 },
+				(_, i) => today.getFullYear() - 50 + i
+			), // Пример диапазона годов
+			selectedDay: this.days[today.getDay()], // Текущий день недели
+			selectedDayOfMonth: today.getDate(), // Текущий день месяца
+			selectedMonth: this.months[today.getMonth()], // Текущий месяц
+			selectedYear: today.getFullYear(), // Текущий год
 		}
 	},
 }
