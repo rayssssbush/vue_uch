@@ -13,6 +13,7 @@ import TheWelcome from './components/TheWelcome.vue'
 					<th>Зарплата</th>
 					<th>Возраст</th>
 					<th>Удалить</th>
+					<th>Редактировать</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -24,9 +25,30 @@ import TheWelcome from './components/TheWelcome.vue'
 					<td>
 						<button @click="removeUser(index)">Удалить</button>
 					</td>
+					<td>
+						<button @click="editUser(index)">Редактировать</button>
+					</td>
 				</tr>
 			</tbody>
 		</table>
+
+		<!-- Модальное окно для редактирования -->
+		<div v-if="isEditing" class="modal">
+			<div class="modal-content">
+				<h2>Редактировать пользователя</h2>
+				<label for="name">Имя:</label>
+				<input type="text" v-model="editedUser.name" />
+
+				<label for="salary">Зарплата:</label>
+				<input type="number" v-model="editedUser.salary" />
+
+				<label for="age">Возраст:</label>
+				<input type="number" v-model="editedUser.age" />
+
+				<button @click="saveUser">Сохранить</button>
+				<button @click="cancelEdit">Отменить</button>
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -39,16 +61,59 @@ export default {
 				{ id: 2, name: 'name2', salary: 200, age: 40 },
 				{ id: 3, name: 'name3', salary: 300, age: 50 },
 			],
+			isEditing: false, // Флаг для отображения модального окна
+			editedUser: {}, // Объект для редактируемого пользователя
+			editingIndex: null, // Индекс редактируемого пользователя
 		}
 	},
 	methods: {
 		// Метод для удаления работника
 		removeUser(index) {
-			this.users.splice(index, 1) // Удаляем пользователя по индексу
+			this.users.splice(index, 1)
+		},
+
+		// Метод для начала редактирования
+		editUser(index) {
+			this.editedUser = { ...this.users[index] } // Копируем данные пользователя для редактирования
+			this.editingIndex = index
+			this.isEditing = true // Показываем модальное окно
+		},
+
+		// Метод для сохранения изменений
+		saveUser() {
+			this.users[this.editingIndex] = { ...this.editedUser } // Обновляем данные пользователя
+			this.isEditing = false // Закрываем модальное окно
+		},
+
+		// Метод для отмены редактирования
+		cancelEdit() {
+			this.isEditing = false // Закрываем модальное окно без изменений
 		},
 	},
 }
 </script>
+
+<style scoped>
+/* Стиль для модального окна */
+.modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.modal-content {
+	background: white;
+	padding: 20px;
+	border-radius: 5px;
+	width: 300px;
+}
+</style>
 
 <style scoped>
 #app {
