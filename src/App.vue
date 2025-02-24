@@ -5,20 +5,17 @@ import TheWelcome from './components/TheWelcome.vue'
 
 <template>
 	<div>
-		<!-- Вывод суммы элементов объекта -->
-		<p>
-			Сумма элементов объекта:
-			{{ Object.values(obj).reduce((sum, value) => sum + value, 0) }}
-		</p>
+		<button @click="showDate">Показать текущую дату</button>
 	</div>
 </template>
 
 <script>
 export default {
-	data() {
-		return {
-			obj: { x: 1, y: 2, z: 3 },
-		}
+	methods: {
+		showDate() {
+			const currentDate = new Date()
+			alert(`Текущая дата: ${currentDate.toLocaleString()}`)
+		},
 	},
 }
 </script>
