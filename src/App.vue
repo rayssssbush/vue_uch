@@ -5,13 +5,17 @@ import TheWelcome from './components/TheWelcome.vue'
 
 <template>
 	<div>
-		<!-- Цикл для вывода каждого компонента Employee -->
 		<div v-for="(user, index) in users" :key="user.id">
-			<p>Name: {{ user.name }}</p>
-			<p>Salary: {{ user.salary }}</p>
-			<p>Age: {{ user.age }}</p>
-			<!-- Кнопка для удаления компонента -->
-			<button @click="removeEmployee(index)">Delete</button>
+			<!-- Компонент для редактирования данных работника -->
+			<div>
+				<p>Name: <input v-model="editableUsers[index].name" /></p>
+				<p>
+					Salary: <input v-model="editableUsers[index].salary" type="number" />
+				</p>
+				<p>Age: <input v-model="editableUsers[index].age" type="number" /></p>
+				<button @click="saveChanges(index)">Save</button>
+				<button @click="cancelChanges(index)">Cancel</button>
+			</div>
 		</div>
 	</div>
 </template>
@@ -25,16 +29,34 @@ export default {
 				{ id: 2, name: 'name2', salary: 200, age: 40 },
 				{ id: 3, name: 'name3', salary: 300, age: 50 },
 			],
+			editableUsers: [
+				{ ...this.users[0] },
+				{ ...this.users[1] },
+				{ ...this.users[2] },
+			],
 		}
 	},
 	methods: {
-		// Метод для удаления работника по индексу
-		removeEmployee(index) {
-			this.users.splice(index, 1)
+		// Сохранение изменений
+		saveChanges(index) {
+			this.$set(this.users, index, this.editableUsers[index])
+		},
+		// Отмена изменений
+		cancelChanges(index) {
+			this.editableUsers[index] = { ...this.users[index] }
 		},
 	},
 }
 </script>
+
+<style scoped>
+input {
+	margin: 5px;
+}
+button {
+	margin: 5px;
+}
+</style>
 
 <style scoped>
 #app {
