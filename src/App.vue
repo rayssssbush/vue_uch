@@ -5,10 +5,15 @@ import TheWelcome from './components/TheWelcome.vue'
 
 <template>
 	<div>
-		<p :class="obj">
-			Этот абзац имеет динамически добавленные классы в зависимости от значений
-			в объекте.
+		<!-- Абзац с динамическим классом, который скрывает элемент -->
+		<p :class="{ hidden: obj.hidden }">
+			Этот абзац может быть скрыт или показан.
 		</p>
+
+		<!-- Кнопки для управления состоянием -->
+		<button @click="showElement">Показать элемент</button>
+		<button @click="hideElement">Скрыть элемент</button>
+		<button @click="toggleElement">Тогглить элемент</button>
 	</div>
 </template>
 
@@ -17,21 +22,28 @@ export default {
 	data() {
 		return {
 			obj: {
-				done: true,
-				selected: false,
+				hidden: true, // Скрыто по умолчанию
 			},
 		}
+	},
+	methods: {
+		showElement() {
+			this.obj.hidden = false // Показываем элемент
+		},
+		hideElement() {
+			this.obj.hidden = true // Скрываем элемент
+		},
+		toggleElement() {
+			this.obj.hidden = !this.obj.hidden // Переключаем видимость элемента
+		},
 	},
 }
 </script>
 
 <style scoped>
-.done {
-	color: green;
-}
-
-.selected {
-	background-color: yellow;
+/* Класс для скрытия элемента */
+.hidden {
+	display: none;
 }
 </style>
 
