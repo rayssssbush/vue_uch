@@ -4,9 +4,8 @@ import TheWelcome from './components/TheWelcome.vue'
 </script>
 
 <template>
-	<div id="app">
-		<div>{{ name }}</div>
-		<div>{{ surn }}</div>
+	<div>
+		<a :href="href">{{ text }}</a>
 	</div>
 </template>
 
@@ -14,8 +13,8 @@ import TheWelcome from './components/TheWelcome.vue'
 export default {
 	data() {
 		return {
-			name: 'John',
-			surn: 'Smit',
+			text: 'page',
+			href: 'page.html',
 		}
 	},
 }
