@@ -5,13 +5,11 @@ import TheWelcome from './components/TheWelcome.vue'
 
 <template>
 	<div>
-		<!-- Абзацы, изначально видны -->
-		<p v-if="isVisible">Абзац 1</p>
-		<p v-if="isVisible">Абзац 2</p>
-		<p v-if="isVisible">Абзац 3</p>
+		<!-- Абзац, который будет показываться/скрываться -->
+		<p v-show="isVisible">Это абзац, который можно показать или скрыть</p>
 
-		<!-- Кнопка для скрытия абзацев -->
-		<button @click="hideParagraphs">Скрыть абзацы</button>
+		<!-- Кнопка для переключения видимости абзаца -->
+		<button @click="toggleParagraph">Тогглить абзац</button>
 	</div>
 </template>
 
@@ -19,13 +17,13 @@ import TheWelcome from './components/TheWelcome.vue'
 export default {
 	data() {
 		return {
-			isVisible: true, // Изначально абзацы видны
+			isVisible: true, // Изначально абзац видим
 		}
 	},
 	methods: {
-		// Метод для скрытия абзацев
-		hideParagraphs() {
-			this.isVisible = false
+		// Метод для тогглинга видимости абзаца
+		toggleParagraph() {
+			this.isVisible = !this.isVisible
 		},
 	},
 }
