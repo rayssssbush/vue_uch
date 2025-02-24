@@ -5,14 +5,22 @@ import TheWelcome from './components/TheWelcome.vue'
 
 <template>
 	<div>
-		<p v-for="n in 30" :key="n">{{ n }}</p>
+		<p v-for="item in positiveItems" :key="item">{{ item }}</p>
 	</div>
 </template>
 
 <script>
 export default {
 	data() {
-		return {}
+		return {
+			items: [1, -2, 3, -4, 5],
+		}
+	},
+	computed: {
+		positiveItems() {
+			// Фильтруем и возвращаем только положительные элементы
+			return this.items.filter(item => item > 0)
+		},
 	},
 }
 </script>
