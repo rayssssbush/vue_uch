@@ -5,8 +5,11 @@ import TheWelcome from './components/TheWelcome.vue'
 
 <template>
 	<div>
-		<p>Квадрат числа: {{ num * num }}</p>
-		<p>Сумма чисел: {{ num1 + num2 + num3 }}</p>
+		<!-- Вывод каждого элемента массива в отдельном абзаце -->
+		<p v-for="(item, index) in arr" :key="index">{{ item }}</p>
+
+		<!-- Вывод суммы элементов массива -->
+		<p>Сумма элементов массива: {{ arr.reduce((sum, num) => sum + num, 0) }}</p>
 	</div>
 </template>
 
@@ -14,10 +17,8 @@ import TheWelcome from './components/TheWelcome.vue'
 export default {
 	data() {
 		return {
-			num: 5,
-			num1: 1,
-			num2: 2,
-			num3: 3,
+			arr: ['x', 'y', 'z'], // для первого случая
+			// arr: [1, 2, 3],     // для второго случая
 		}
 	},
 }
