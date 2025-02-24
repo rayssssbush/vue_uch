@@ -4,25 +4,32 @@ import TheWelcome from './components/TheWelcome.vue'
 </script>
 <template>
 	<div>
-		<!-- Кнопки для вывода квадратов чисел -->
-		<button @click="showSquare(2)">Квадрат числа 2</button>
-		<button @click="showSquare(3)">Квадрат числа 3</button>
+		<!-- Абзац для вывода содержимого свойства text -->
+		<p>{{ text }}</p>
+
+		<!-- Кнопки для изменения значения text -->
+		<button @click="changeText('Первое значение')">Первое значение</button>
+		<button @click="changeText('Второе значение')">Второе значение</button>
 	</div>
 </template>
 
 <script>
 export default {
+	data() {
+		return {
+			text: 'Начальное значение', // Исходное значение свойства text
+		}
+	},
 	methods: {
-		// Метод для вывода квадрата числа через alert
-		showSquare(number) {
-			alert(`Квадрат числа ${number}: ${number * number}`)
+		// Метод для изменения значения text
+		changeText(newText) {
+			this.text = newText
 		},
 	},
 }
 </script>
 
 <style scoped>
-/* Стили по желанию */
 button {
 	padding: 10px 20px;
 	background-color: #4caf50;
