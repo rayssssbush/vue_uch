@@ -5,27 +5,19 @@ import TheWelcome from './components/TheWelcome.vue'
 
 <template>
 	<div>
-		<!-- Задача 1: Инпут и вывод текста при нажатии Enter -->
-		<input
-			v-model="inputText"
-			@keyup.enter="displayText"
-			placeholder="Введите текст"
-		/>
-		<p>{{ displayedText }}</p>
+		<!-- Задача 1: Добавление элемента в конец списка -->
+		<ul>
+			<li v-for="(item, index) in items" :key="index">{{ item }}</li>
+		</ul>
+		<input v-model="newItem" placeholder="Введите новый элемент" />
+		<button @click="addItemToEnd">Добавить в конец</button>
 
-		<!-- Задача 2: Ссылка с проверкой нажатия Ctrl -->
-		<a href="#" @click="handleLinkClick">Нажмите на ссылку с зажатым Ctrl</a>
-		<p>{{ linkMessage }}</p>
-
-		<!-- Задача 3: Ссылка с различными действиями на кнопки мыши -->
-		<a
-			href="#"
-			@mousedown.left="mouseClick('left')"
-			@mousedown.right="mouseClick('right')"
-			@mousedown.middle="mouseClick('middle')"
-			>Нажмите на ссылку</a
-		>
-		<p>{{ mouseMessage }}</p>
+		<!-- Задача 2: Добавление элемента в начало списка -->
+		<ul>
+			<li v-for="(item, index) in itemsReversed" :key="index">{{ item }}</li>
+		</ul>
+		<input v-model="newItem" placeholder="Введите новый элемент" />
+		<button @click="addItemToStart">Добавить в начало</button>
 	</div>
 </template>
 
@@ -33,30 +25,30 @@ import TheWelcome from './components/TheWelcome.vue'
 export default {
 	data() {
 		return {
-			inputText: '', // Для хранения текста из инпута
-			displayedText: '', // Для отображения текста при нажатии Enter
-			linkMessage: '', // Сообщение для ссылки с Ctrl
-			mouseMessage: '', // Сообщение для мышиных кнопок
+			items: ['Элемент 1', 'Элемент 2', 'Элемент 3'],
+			newItem: '', // Текст для добавления в список
 		}
 	},
-	methods: {
-		// Задача 1: Отображаем введенный текст при нажатии Enter
-		displayText() {
-			this.displayedText = this.inputText
+	computed: {
+		// Создаем вычисляемое свойство для отображения списка с элементами в обратном порядке
+		itemsReversed() {
+			return [...this.items].reverse()
 		},
-
-		// Задача 2: Проверка нажатия на ссылку с зажатым Ctrl
-		handleLinkClick(event) {
-			if (event.ctrlKey) {
-				this.linkMessage = 'Ctrl клавиша зажата!'
-			} else {
-				this.linkMessage = 'Ctrl клавиша не зажата'
+	},
+	methods: {
+		// Задача 1: Добавляем новый элемент в конец списка
+		addItemToEnd() {
+			if (this.newItem.trim()) {
+				this.items.push(this.newItem)
+				this.newItem = '' // Очищаем инпут
 			}
 		},
-
-		// Задача 3: Определение какой кнопкой мыши был совершен клик
-		mouseClick(button) {
-			this.mouseMessage = button
+		// Задача 2: Добавляем новый элемент в начало списка
+		addItemToStart() {
+			if (this.newItem.trim()) {
+				this.items.unshift(this.newItem)
+				this.newItem = '' // Очищаем инпут
+			}
 		},
 	},
 }
