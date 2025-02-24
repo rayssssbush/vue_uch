@@ -5,11 +5,16 @@ import TheWelcome from './components/TheWelcome.vue'
 
 <template>
 	<div>
-		<!-- Абзац, который будет показываться/скрываться -->
-		<p v-show="isVisible">Это абзац, который можно показать или скрыть</p>
+		<!-- Задача 1: Каждый элемент массива в своем div -->
+		<div v-for="item in items" :key="item">{{ item }}</div>
 
-		<!-- Кнопка для переключения видимости абзаца -->
-		<button @click="toggleParagraph">Тогглить абзац</button>
+		<!-- Задача 2: Квадрат каждого элемента массива в своем div -->
+		<div v-for="item in items" :key="item">{{ item * item }}</div>
+
+		<!-- Задача 3: Элементы массива в виде списка ul -->
+		<ul>
+			<li v-for="item in items" :key="item">{{ item }}</li>
+		</ul>
 	</div>
 </template>
 
@@ -17,32 +22,11 @@ import TheWelcome from './components/TheWelcome.vue'
 export default {
 	data() {
 		return {
-			isVisible: true, // Изначально абзац видим
+			items: [1, 2, 3, 4, 5],
 		}
-	},
-	methods: {
-		// Метод для тогглинга видимости абзаца
-		toggleParagraph() {
-			this.isVisible = !this.isVisible
-		},
 	},
 }
 </script>
-
-<style scoped>
-button {
-	padding: 10px 20px;
-	background-color: #4caf50;
-	color: white;
-	border: none;
-	cursor: pointer;
-	margin-top: 20px;
-}
-
-button:hover {
-	background-color: #45a049;
-}
-</style>
 
 <style scoped>
 #app {
