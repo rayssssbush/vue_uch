@@ -17,18 +17,14 @@ import TheWelcome from './components/TheWelcome.vue'
 				</tr>
 			</thead>
 			<tbody>
-				<tr v-for="(user, index) in users" :key="user.id">
-					<td>{{ user.id }}</td>
-					<td>{{ user.name }}</td>
-					<td>{{ user.salary }}</td>
-					<td>{{ user.age }}</td>
-					<td>
-						<button @click="removeUser(index)">Удалить</button>
-					</td>
-					<td>
-						<button @click="editUser(index)">Редактировать</button>
-					</td>
-				</tr>
+				<Employee
+					v-for="(user, index) in users"
+					:key="user.id"
+					:user="user"
+					:index="index"
+					@remove="removeUser"
+					@edit="editUser"
+				/>
 			</tbody>
 		</table>
 
@@ -53,7 +49,12 @@ import TheWelcome from './components/TheWelcome.vue'
 </template>
 
 <script>
+import Employee from './Employee.vue'
+
 export default {
+	components: {
+		Employee,
+	},
 	data() {
 		return {
 			users: [
@@ -61,40 +62,32 @@ export default {
 				{ id: 2, name: 'name2', salary: 200, age: 40 },
 				{ id: 3, name: 'name3', salary: 300, age: 50 },
 			],
-			isEditing: false, // Флаг для отображения модального окна
-			editedUser: {}, // Объект для редактируемого пользователя
-			editingIndex: null, // Индекс редактируемого пользователя
+			isEditing: false,
+			editedUser: {},
+			editingIndex: null,
 		}
 	},
 	methods: {
-		// Метод для удаления работника
 		removeUser(index) {
 			this.users.splice(index, 1)
 		},
-
-		// Метод для начала редактирования
 		editUser(index) {
-			this.editedUser = { ...this.users[index] } // Копируем данные пользователя для редактирования
+			this.editedUser = { ...this.users[index] }
 			this.editingIndex = index
-			this.isEditing = true // Показываем модальное окно
+			this.isEditing = true
 		},
-
-		// Метод для сохранения изменений
 		saveUser() {
-			this.users[this.editingIndex] = { ...this.editedUser } // Обновляем данные пользователя
-			this.isEditing = false // Закрываем модальное окно
+			this.users[this.editingIndex] = { ...this.editedUser }
+			this.isEditing = false
 		},
-
-		// Метод для отмены редактирования
 		cancelEdit() {
-			this.isEditing = false // Закрываем модальное окно без изменений
+			this.isEditing = false
 		},
 	},
 }
 </script>
 
 <style scoped>
-/* Стиль для модального окна */
 .modal {
 	position: fixed;
 	top: 0;
