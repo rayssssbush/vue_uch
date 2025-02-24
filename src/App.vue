@@ -4,12 +4,21 @@ import TheWelcome from './components/TheWelcome.vue'
 </script>
 <template>
 	<div>
-		<!-- Абзац, изначально скрыт -->
-		<p v-if="isVisible">Это скрытый абзац, который теперь виден!</p>
+		<!-- Абзацы, изначально скрыты -->
+		<p v-if="isVisible[0]">Абзац 1</p>
+		<p v-if="isVisible[1]">Абзац 2</p>
+		<p v-if="isVisible[2]">Абзац 3</p>
 
-		<!-- Кнопки для показа/скрытия абзаца -->
-		<button v-if="!isVisible" @click="showParagraph">Показать абзац</button>
-		<button v-if="isVisible" @click="hideParagraph">Скрыть абзац</button>
+		<!-- Кнопки для toggling абзацев -->
+		<button @click="toggleVisibility(0)">
+			{{ isVisible[0] ? 'Скрыть абзац 1' : 'Показать абзац 1' }}
+		</button>
+		<button @click="toggleVisibility(1)">
+			{{ isVisible[1] ? 'Скрыть абзац 2' : 'Показать абзац 2' }}
+		</button>
+		<button @click="toggleVisibility(2)">
+			{{ isVisible[2] ? 'Скрыть абзац 3' : 'Показать абзац 3' }}
+		</button>
 	</div>
 </template>
 
@@ -17,17 +26,13 @@ import TheWelcome from './components/TheWelcome.vue'
 export default {
 	data() {
 		return {
-			isVisible: false, // Абзац изначально скрыт
+			isVisible: [false, false, false], // Массив для управления видимостью абзацев
 		}
 	},
 	methods: {
-		// Метод для показа абзаца
-		showParagraph() {
-			this.isVisible = true
-		},
-		// Метод для скрытия абзаца
-		hideParagraph() {
-			this.isVisible = false
+		// Метод для переключения видимости абзаца
+		toggleVisibility(index) {
+			this.isVisible[index] = !this.isVisible[index]
 		},
 	},
 }
@@ -41,16 +46,12 @@ button {
 	color: white;
 	border: none;
 	cursor: pointer;
-	margin-top: 20px;
+	margin-top: 10px;
 }
 
 button:hover {
 	background-color: #45a049;
 }
-</style>
-
-<style scoped>
-/* Стили по желанию */
 </style>
 
 <style scoped>
