@@ -75,6 +75,50 @@ export default {
 	},
 }
 </script>
+<template>
+	<div>
+		<!-- Инпут -->
+		<input
+			v-bind:disabled="isDisabled"
+			type="text"
+			placeholder="Введите текст"
+		/>
+
+		<!-- Кнопка для блокировки/отблокировки инпута -->
+		<button @click="toggleInput">Toggle Input</button>
+
+		<!-- Чекбокс для управления состоянием инпута -->
+		<label>
+			<input type="checkbox" v-model="isChecked" />
+			Блокировка инпута
+		</label>
+
+		<p>Инпут {{ isDisabled ? 'заблокирован' : 'отблокирован' }}</p>
+	</div>
+</template>
+
+<script>
+export default {
+	data() {
+		return {
+			isDisabled: false, // Начальное состояние инпута
+			isChecked: true, // Чекбокс по умолчанию отмечен
+		}
+	},
+	watch: {
+		// Если чекбокс изменяет свое состояние, обновляем состояние инпута
+		isChecked(newValue) {
+			this.isDisabled = !newValue
+		},
+	},
+	methods: {
+		// Метод для переключения блокировки инпута
+		toggleInput() {
+			this.isDisabled = !this.isDisabled
+		},
+	},
+}
+</script>
 
 <style scoped>
 #app {
