@@ -4,11 +4,15 @@ import TheWelcome from './components/TheWelcome.vue'
 </script>
 <template>
 	<div>
-		<!-- Вывод полной стоимости (цена * количество) -->
-		<p>Полная стоимость: {{ price }}</p>
+		<!-- Ссылка с обработчиком клика, отменяющим переход -->
+		<a href="https://example.com" @click.prevent="handleLinkClick"
+			>Кликни меня, но не перейдешь!</a
+		>
 
-		<!-- Кнопка для изменения стоимости продукта -->
-		<button @click="changeCost(200)">Изменить цену на 200</button>
+		<!-- Кнопка с обработчиком клика, срабатывающим только один раз -->
+		<button @click="handleButtonClick" :disabled="buttonClicked">
+			Нажми меня (срабатывает только один раз)
+		</button>
 	</div>
 </template>
 
@@ -16,26 +20,33 @@ import TheWelcome from './components/TheWelcome.vue'
 export default {
 	data() {
 		return {
-			cost: 100, // Начальная цена продукта
-			amount: 5, // Количество продуктов
+			buttonClicked: false, // Флаг, чтобы отслеживать, был ли клик по кнопке
 		}
 	},
-	computed: {
-		// Вычисляемое свойство для расчета полной стоимости
-		price() {
-			return this.cost * this.amount
-		},
-	},
 	methods: {
-		// Метод для изменения стоимости
-		changeCost(newCost) {
-			this.cost = newCost
+		// Обработчик клика по ссылке, предотвращающий переход
+		handleLinkClick(event) {
+			console.log('Ссылка была кликнута, но переход не произошел.')
+			// Если необходимо, можно добавить дополнительную логику обработки
+		},
+
+		// Обработчик клика по кнопке, срабатывающий только один раз
+		handleButtonClick() {
+			if (!this.buttonClicked) {
+				console.log('Кнопка была кликнута!')
+				this.buttonClicked = true // Останавливаем дальнейшие клики
+			}
 		},
 	},
 }
 </script>
 
 <style scoped>
+a {
+	color: #4caf50;
+	text-decoration: none;
+}
+
 button {
 	padding: 10px 20px;
 	background-color: #4caf50;
@@ -45,8 +56,8 @@ button {
 	margin-top: 20px;
 }
 
-button:hover {
-	background-color: #45a049;
+button:disabled {
+	background-color: #cccccc;
 }
 </style>
 
