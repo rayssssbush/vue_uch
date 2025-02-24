@@ -5,26 +5,28 @@ import TheWelcome from './components/TheWelcome.vue'
 
 <template>
 	<div>
-		<p>Name: {{ name }}</p>
-		<p>Salary: {{ salary }}</p>
-		<p>Age: {{ age }}</p>
+		<button @click="functionOne">Call Function One</button>
+		<button @click="functionTwo">Call Function Two</button>
 	</div>
 </template>
 
 <script>
 export default {
-	props: {
-		name: {
-			type: String,
-			required: true,
+	data() {
+		return {
+			users: [
+				{ id: 1, name: 'name1', salary: 100, age: 30 },
+				{ id: 2, name: 'name2', salary: 200, age: 40 },
+				{ id: 3, name: 'name3', salary: 300, age: 50 },
+			],
+		}
+	},
+	methods: {
+		functionOne() {
+			alert('Function One was called!')
 		},
-		salary: {
-			type: Number,
-			required: true,
-		},
-		age: {
-			type: Number,
-			required: true,
+		functionTwo() {
+			alert('Function Two was called!')
 		},
 	},
 }
