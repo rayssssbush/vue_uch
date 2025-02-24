@@ -4,30 +4,31 @@ import TheWelcome from './components/TheWelcome.vue'
 </script>
 <template>
 	<div>
-		<!-- Кнопка для вывода даты по клику -->
-		<button @click="showDate">Показать текущую дату (клик)</button>
-
-		<!-- Элемент для вывода даты по наведению -->
-		<div
-			@mouseover="showDate"
-			style="
-				margin-top: 20px;
-				padding: 10px;
-				background-color: lightblue;
-				text-align: center;
-			"
-		>
-			Наведите мышь, чтобы увидеть дату
-		</div>
+		<p>Сегодня: {{ getCurrentDay() }}</p>
 	</div>
 </template>
 
 <script>
 export default {
 	methods: {
-		showDate() {
-			const currentDate = new Date()
-			alert(`Текущая дата: ${currentDate.toLocaleString()}`)
+		// Вспомогательный метод для получения дня недели по числу
+		getDayByNumber(dayNumber) {
+			const days = [
+				'Воскресенье',
+				'Понедельник',
+				'Вторник',
+				'Среда',
+				'Четверг',
+				'Пятница',
+				'Суббота',
+			]
+			return days[dayNumber]
+		},
+
+		// Основной метод для вывода текущего дня недели
+		getCurrentDay() {
+			const currentDayNumber = new Date().getDay() // Получаем число дня недели (0 - Воскресенье, 1 - Понедельник и т.д.)
+			return this.getDayByNumber(currentDayNumber)
 		},
 	},
 }
@@ -35,21 +36,6 @@ export default {
 
 <style scoped>
 /* Стили по желанию */
-button {
-	padding: 10px 20px;
-	background-color: #4caf50;
-	color: white;
-	border: none;
-	cursor: pointer;
-}
-
-button:hover {
-	background-color: #45a049;
-}
-
-div {
-	cursor: pointer;
-}
 </style>
 
 <style scoped>
