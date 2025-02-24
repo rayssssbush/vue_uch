@@ -5,7 +5,10 @@ import TheWelcome from './components/TheWelcome.vue'
 
 <template>
 	<div>
-		<p :class="cssClasses">Этот абзац имеет динамически добавленные классы!</p>
+		<p :class="obj">
+			Этот абзац имеет динамически добавленные классы в зависимости от значений
+			в объекте.
+		</p>
 	</div>
 </template>
 
@@ -13,19 +16,22 @@ import TheWelcome from './components/TheWelcome.vue'
 export default {
 	data() {
 		return {
-			cssClasses: ['class1', 'class2'],
+			obj: {
+				done: true,
+				selected: false,
+			},
 		}
 	},
 }
 </script>
 
 <style scoped>
-.class1 {
-	color: red;
+.done {
+	color: green;
 }
 
-.class2 {
-	font-weight: bold;
+.selected {
+	background-color: yellow;
 }
 </style>
 
