@@ -2,23 +2,11 @@
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
 </script>
+
 <template>
 	<div>
-		<!-- Абзацы, изначально скрыты -->
-		<p v-if="isVisible[0]">Абзац 1</p>
-		<p v-if="isVisible[1]">Абзац 2</p>
-		<p v-if="isVisible[2]">Абзац 3</p>
-
-		<!-- Кнопки для toggling абзацев -->
-		<button @click="toggleVisibility(0)">
-			{{ isVisible[0] ? 'Скрыть абзац 1' : 'Показать абзац 1' }}
-		</button>
-		<button @click="toggleVisibility(1)">
-			{{ isVisible[1] ? 'Скрыть абзац 2' : 'Показать абзац 2' }}
-		</button>
-		<button @click="toggleVisibility(2)">
-			{{ isVisible[2] ? 'Скрыть абзац 3' : 'Показать абзац 3' }}
-		</button>
+		<!-- Условный вывод текста в зависимости от значения isAdmin -->
+		<p>{{ isAdmin ? 'Вы администратор.' : 'Вы не администратор.' }}</p>
 	</div>
 </template>
 
@@ -26,31 +14,17 @@ import TheWelcome from './components/TheWelcome.vue'
 export default {
 	data() {
 		return {
-			isVisible: [false, false, false], // Массив для управления видимостью абзацев
+			isAdmin: true, // Изначально значение isAdmin = true
 		}
-	},
-	methods: {
-		// Метод для переключения видимости абзаца
-		toggleVisibility(index) {
-			this.isVisible[index] = !this.isVisible[index]
-		},
 	},
 }
 </script>
 
 <style scoped>
 /* Стили по желанию */
-button {
-	padding: 10px 20px;
-	background-color: #4caf50;
-	color: white;
-	border: none;
-	cursor: pointer;
-	margin-top: 10px;
-}
-
-button:hover {
-	background-color: #45a049;
+p {
+	font-size: 18px;
+	color: #333;
 }
 </style>
 
