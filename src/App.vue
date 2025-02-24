@@ -4,15 +4,11 @@ import TheWelcome from './components/TheWelcome.vue'
 </script>
 <template>
 	<div>
-		<!-- Ссылка с обработчиком клика, отменяющим переход -->
-		<a href="https://example.com" @click.prevent="handleLinkClick"
-			>Кликни меня, но не перейдешь!</a
-		>
+		<!-- Первый абзац, показывается, если visible = true -->
+		<p v-if="visible">Первый абзац: visible = true</p>
 
-		<!-- Кнопка с обработчиком клика, срабатывающим только один раз -->
-		<button @click="handleButtonClick" :disabled="buttonClicked">
-			Нажми меня (срабатывает только один раз)
-		</button>
+		<!-- Второй абзац, показывается, если visible = false -->
+		<p v-else>Второй абзац: visible = false</p>
 	</div>
 </template>
 
@@ -20,45 +16,14 @@ import TheWelcome from './components/TheWelcome.vue'
 export default {
 	data() {
 		return {
-			buttonClicked: false, // Флаг, чтобы отслеживать, был ли клик по кнопке
+			visible: true, // Изначальное значение для visible
 		}
-	},
-	methods: {
-		// Обработчик клика по ссылке, предотвращающий переход
-		handleLinkClick(event) {
-			console.log('Ссылка была кликнута, но переход не произошел.')
-			// Если необходимо, можно добавить дополнительную логику обработки
-		},
-
-		// Обработчик клика по кнопке, срабатывающий только один раз
-		handleButtonClick() {
-			if (!this.buttonClicked) {
-				console.log('Кнопка была кликнута!')
-				this.buttonClicked = true // Останавливаем дальнейшие клики
-			}
-		},
 	},
 }
 </script>
 
 <style scoped>
-a {
-	color: #4caf50;
-	text-decoration: none;
-}
-
-button {
-	padding: 10px 20px;
-	background-color: #4caf50;
-	color: white;
-	border: none;
-	cursor: pointer;
-	margin-top: 20px;
-}
-
-button:disabled {
-	background-color: #cccccc;
-}
+/* Стили по желанию */
 </style>
 
 <style scoped>
