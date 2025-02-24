@@ -5,15 +5,28 @@ import TheWelcome from './components/TheWelcome.vue'
 
 <template>
 	<div>
-		<ul>
-			<li
-				v-for="(item, index) in items"
-				:key="index"
-				@click="removeItem(index)"
-			>
-				{{ item }}
-			</li>
-		</ul>
+		<table border="1">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Имя</th>
+					<th>Зарплата</th>
+					<th>Возраст</th>
+					<th>Удалить</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr v-for="(user, index) in users" :key="user.id">
+					<td>{{ user.id }}</td>
+					<td>{{ user.name }}</td>
+					<td>{{ user.salary }}</td>
+					<td>{{ user.age }}</td>
+					<td>
+						<button @click="removeUser(index)">Удалить</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 </template>
 
@@ -21,13 +34,17 @@ import TheWelcome from './components/TheWelcome.vue'
 export default {
 	data() {
 		return {
-			items: ['Элемент 1', 'Элемент 2', 'Элемент 3', 'Элемент 4'],
+			users: [
+				{ id: 1, name: 'name1', salary: 100, age: 30 },
+				{ id: 2, name: 'name2', salary: 200, age: 40 },
+				{ id: 3, name: 'name3', salary: 300, age: 50 },
+			],
 		}
 	},
 	methods: {
-		// Метод для удаления элемента из массива
-		removeItem(index) {
-			this.items.splice(index, 1) // Удаляем элемент по индексу
+		// Метод для удаления работника
+		removeUser(index) {
+			this.users.splice(index, 1) // Удаляем пользователя по индексу
 		},
 	},
 }
